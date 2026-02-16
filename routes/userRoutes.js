@@ -1,0 +1,22 @@
+const express = require('express');
+const router = express.Router();
+const {
+  getProfile,
+  updateProfile,
+  getUserStats,
+  followUser,
+  unfollowUser,
+  getSocialFeed
+} = require('../controllers/userController');
+const { protect } = require('../middleware/auth');
+
+router.get('/profile', protect, getProfile);
+router.put('/profile', protect, updateProfile);
+router.get('/stats', protect, getUserStats);
+router.get('/feed', protect, getSocialFeed);
+
+router.route('/follow/:id')
+  .post(protect, followUser)
+  .delete(protect, unfollowUser);
+
+module.exports = router;
