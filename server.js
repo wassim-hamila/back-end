@@ -1,28 +1,27 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const cors = require("cors");
-app.use(cors({
-  origin: "https://front-end-05.vercel.app",
-  credentials: true
-}));
+const cors = require('cors');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
-// Charger les variables d'environnement
 dotenv.config();
-
-// Connexion à la base de données
 connectDB();
 
 const app = express();
 
-// Middleware
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: [
+    'http://localhost:5173',   // dev Vite
+    'http://localhost:3000',
+    'https://front-end-05-jaej2bq4l-wassim-hamlas-projects.vercel.app',
+    'https://front-end-05.vercel.app'
+  ],
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
