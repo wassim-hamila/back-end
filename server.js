@@ -1,6 +1,10 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors');
+const cors = require("cors");
+app.use(cors({
+  origin: "https://front-end-05.vercel.app",
+  credentials: true
+}));
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
