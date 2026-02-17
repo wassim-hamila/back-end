@@ -1,25 +1,28 @@
 const express = require('express');
 const dotenv = require('dotenv');
-app.options('*', cors());
+const cors = require("cors");
+app.use(cors({
+  origin: "https://front-end-05.vercel.app",
+  credentials: true
+}));
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
+// Charger les variables d'environnement
 dotenv.config();
+
+// Connexion à la base de données
 connectDB();
 
 const app = express();
 
+// Middleware
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://front-end-05.vercel.app"
-  ],
+  origin: 'http://localhost:3000',
   credentials: true
 }));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
