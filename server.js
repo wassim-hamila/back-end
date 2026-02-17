@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors');
+app.options('*', cors());
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -11,10 +11,8 @@ const app = express();
 
 app.use(cors({
   origin: [
-    'http://localhost:5173',   // dev Vite
-    'http://localhost:3000',
-    'https://front-end-05-jaej2bq4l-wassim-hamlas-projects.vercel.app',
-    'https://front-end-05.vercel.app'
+    "http://localhost:5173",
+    "https://front-end-05.vercel.app"
   ],
   credentials: true
 }));
